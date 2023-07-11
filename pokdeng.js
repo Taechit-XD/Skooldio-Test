@@ -61,6 +61,5 @@ while (!stop){
     if(ans == 'No' || ans == 'no'){
         stop = true
     }
-    console.log('networth,', netWorth);
 }
 console.log('> You got total', netWorth, 'chips');
