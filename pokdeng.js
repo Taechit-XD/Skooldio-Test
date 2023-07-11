@@ -4,17 +4,7 @@ let type = ['clubs', 'diamonds', 'hearts', 'spades'];
 let number = [0,'Ace',2,3,4,5,6,7,8,9,10,'Jack','Queen','King'];
 
 let stop = false;
-let bet = 0;
 let netWorth = 0;
-let ans = 'Yes';
-let a = '';
-let b = 0;
-let c = '';
-let d = 0;
-let e = '';
-let f = 0;
-let g = '';
-let h = 0;
 let sumDeal = 0;
 let sumPlayer = 0;
 
@@ -31,45 +21,26 @@ function genCard() {
     while (pile.length < 16){
         x = Math.floor(Math.random()*type.length);
         y = Math.floor(Math.random()*(14 - 1) + 1);
-        console.log(55);
         if (!pile.includes(x.toString()+'-'+y.toString())){
             pile += x.toString()+'-'+y.toString()+'/';
         }
     }
     let tmp = pile.split("/");
-    console.log(tmp)
     let answer = [];
     let m = '';
-    let n = '';
     for (let i = 0; i != 4;i++){
-        m,n = tmp[i].split('-');
-        console.log(m,n);
-        answer.push(m);
-        answer.push(n);
+        m = tmp[i].split('-');
+        answer.push(parseInt(m[0]));
+        answer.push(parseInt(m[1]));
     }
-    // console.log(answer);
+    return answer;
 }
-genCard();
+
 while (!stop){
     console.log('> Please put your bet ');
-    bet = prompt('> ');
-
-    //---------------------------------dealer-----
-    a = Math.floor(Math.random()*type.length);
-    b = Math.floor(Math.random()*(14 - 1) + 1);
-    c = Math.floor(Math.random()*type.length);
-    d = Math.floor(Math.random()*(14 - 1) + 1);
-    while(b == d){
-        d = Math.floor(Math.random()*(14 - 1) + 1);
-    }
-    //---------------------------------player-----
-    e = Math.floor(Math.random()*type.length);
-    f = Math.floor(Math.random()*(14 - 1) + 1);
-    g = Math.floor(Math.random()*type.length);
-    h = Math.floor(Math.random()*(14 - 1) + 1);
-    while(f == h){
-        h = Math.floor(Math.random()*(14 - 1) + 1);
-    }
+    let bet = parseInt(prompt('> '));
+    let [a,b,c,d,e,f,g,h] = genCard(); // abcd dealer, efgh player
+    
     console.log('> You got', type[e]+'-'+number[f], type[g]+'-'+number[h]);
     console.log('> The dealer got', type[a]+'-'+number[b], type[c]+'-'+number[d]);
 
@@ -90,5 +61,6 @@ while (!stop){
     if(ans == 'No' || ans == 'no'){
         stop = true
     }
+    console.log('networth,', netWorth);
 }
 console.log('> You got total', netWorth, 'chips');
